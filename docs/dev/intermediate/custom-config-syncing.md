@@ -43,17 +43,19 @@ public class SyncedInstance<T> {
     [NonSerialized]
     protected static int IntSize = 4;
 
+    [NonSerialized] 
+    static readonly DataContractSerializer serializer = new(typeof(T));
+
     public static T Default { get; private set; }
     public static T Instance { get; private set; }
 
-    public static bool Synced { get; internal set; }
+    internal static bool Synced;
 
     protected void InitInstance(T instance) {
         Default = instance;
         Instance = instance;
         
-        // Makes sure the size of an integer is correct for the current system.
-        // We use 4 by default as that's the size of an int on 32 and 64 bit systems.
+        // Ensures the size of an integer is correct for the current system.
         IntSize = sizeof(int);
     }
 
@@ -68,11 +70,10 @@ public class SyncedInstance<T> {
     }
 
     public static byte[] SerializeToBytes(T val) {
-        BinaryFormatter bf = new();
         using MemoryStream stream = new();
 
         try {
-            bf.Serialize(stream, val);
+            serializer.WriteObject(stream, val);
             return stream.ToArray();
         }
         catch (Exception e) {
@@ -82,22 +83,35 @@ public class SyncedInstance<T> {
     }
 
     public static T DeserializeFromBytes(byte[] data) {
-        BinaryFormatter bf = new();
         using MemoryStream stream = new(data);
 
         try {
-            return (T) bf.Deserialize(stream);
+            return (T) serializer.ReadObject(stream);
         } catch (Exception e) {
             Plugin.Logger.LogError($"Error deserializing instance: {e}");
             return default;
         }
     }
+
+    internal static void SendMessage(string label, ulong clientId, FastBufferWriter stream) {
+        bool fragment = stream.Capacity > stream.MaxCapacity;
+        NetworkDelivery delivery = fragment ? NetworkDelivery.ReliableFragmentedSequenced : NetworkDelivery.Reliable;
+
+        if (fragment) {
+            Plugin.Logger.LogDebug(
+                $"Size of stream ({stream.Capacity}) was past the max buffer size.\n" +
+                "Config instance will be sent in fragments to avoid overflowing the buffer."
+            );
+        }
+
+        MessageManager.SendNamedMessage(label, clientId, stream, delivery);
+    }
 }
 ```
 
-### 1. Inherit SyncedInstance
+### 1. Implement serialization
 
-We will now make use of the config class file made prior by changing this line:
+We will now make use of the `SyncedInstance` class we made earlier by changing the following line:
 
 ```cs
 public class Config
@@ -106,7 +120,7 @@ public class Config
 Into a synced alternative that can be serialized.
 
 ```cs
-[Serializable]
+[DataContract]
 public class Config : SyncedInstance<Config>
 ```
 
@@ -119,6 +133,23 @@ public Config(ConfigFile cfg) {
 }
 ```
 
+Lastly, label all of your properties inside the Config class with the `[DataMember]` attribute.
+Below is an example of the final result.
+
+```cs
+[DataContract]
+public class Config : SyncedInstance<Config> {
+    [DataMember] public bool PLUGIN_ENABLED { get; private set; }
+    [DataMember] public float MOVEMENT_SPEED { get; private set; }
+
+    public Config(ConfigFile cfg) {
+        InitInstance(this);
+
+        // ...
+    }
+}
+```
+
 ### 2. Setup request/receiver methods
 Now simply paste the three following methods within the class.
 While these might look intimidating, they will hopefully start to make more sense in step 3.
@@ -128,7 +159,7 @@ public static void RequestSync() {
     if (!IsClient) return;
 
     using FastBufferWriter stream = new(IntSize, Allocator.Temp);
-    MessageManager.SendNamedMessage("ModName_OnRequestConfigSync", 0uL, stream);
+    SendMessage("ModName_OnRequestConfigSync", 0uL, stream);
 }
 ```
 
@@ -147,7 +178,7 @@ public static void OnRequestSync(ulong clientId, FastBufferReader _) {
         stream.WriteValueSafe(in value, default);
         stream.WriteBytesSafe(array);
 
-        MessageManager.SendNamedMessage("ModName_OnReceiveConfigSync", clientId, stream);
+        SendMessage("ModName_OnReceiveConfigSync", clientId, stream);
     } catch(Exception e) {
         Plugin.Logger.LogInfo($"Error occurred syncing config with client: {clientId}\n{e}");
     }
@@ -201,7 +232,7 @@ public static void InitializeLocalPlayer() {
 
 If you are having issues with this patch, you may want to try **GameNetworkManager** instead.
 ```cs
-[HarmonyPatch(typeof(GameNetworkManager), "SteamMatchmaking_OnLobbyMemberJoined")]
+[HarmonyPatch(typeof(GameNetworkManager), "JoinLobby")]
 ```
 
 Finally, we need to make sure the client reverts back to their own config upon leaving.
@@ -214,16 +245,15 @@ public static void PlayerLeave() {
 }
 ```
 
-## Synced Config Usage
-Every client will now have their config synchronized to the hosts upon joining the game.
+## Using the synced config
+Every client will now have their config synchronized to the hosts upon joining the game.<br>
 All that's left to do is use the synced variables where appropriate.
 
-We can do this by referencing `Config.Instance` from any class.
+We can do this by referencing `Config.Instance` from any class.<br>
 Here's an example that sets the local player's movement speed.
 ```cs
 public static void ExamplePatch(PlayerControllerB __instance) {
-    if (__instance == null)
-        return;
+    if (!__instance) return;
 
     float syncedSpeed = Config.Instance.MOVEMENT_SPEED;
     if (__instance.IsOwner && __instance.isPlayerControlled) {
@@ -259,8 +289,7 @@ harmony.PatchAll(typeof(Config)); // Add this line
 Harmony may refuse to patch the `InitializeLocalPlayer` method inside `Config.cs` if you have already have a dedicated patch file for `PlayerControllerB`. You can try placing the method there instead.
 ```cs
 [HarmonyPatch(typeof(PlayerControllerB))]
-internal class PlayerControllerBPatch
-{
+internal class PlayerControllerBPatch {
     [HarmonyPostfix]
     [HarmonyPatch("ConnectClientToPlayerObject")]
     public static void InitializeLocalPlayer() {
