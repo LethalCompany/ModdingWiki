@@ -40,6 +40,11 @@ dotnet new bepinex5plugin -n MyFirstPlugin -T "netstandard2.1" -U "2022.3.9"
 ```
 
 ::: warning
+If you get the following error (or simmilar) later then double check your `UnityEngine.Modules` Reference's Version is `2022.3.9` and NOT `5.6.0`.
+If this is confusing we recommend using out [template repository](https://github.com/LethalCompany/LethalCompanyTemplate).
+:::
+
+::: warning
 Some people have been [reporting problems](https://github.com/BepInEx/BepInEx.Templates/issues/8) creating new BepInEx plugins from the template when using the .NET 8 SDK:
 
 `Failed to create template.
