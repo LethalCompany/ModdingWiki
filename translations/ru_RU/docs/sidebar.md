@@ -7,6 +7,7 @@
 - [Создание модификации](starting-a-mod)
 - [Open-source и этика](open-source-and-ethics)
 - [Опубликуйте свой мод](publishing-your-mod)
+- [Custom Networking](custom-networking)
 - **Дополнительно**
 - [Часто Задаваемые Вопросы](faq)
 - **Ссылки**
