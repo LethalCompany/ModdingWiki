@@ -1,47 +1,33 @@
 # Open-source et éthique
 
-## What is open-source?
+## Qu'est-ce que l'open-source ?
 
-Open-source means that code is publicly available, to be used, edited, and distributed by anyone. It fosters a
-collaborative and public approach to software development. There are a number of important things to take into account
-when developing open-source software, however.
+Le terme "open-source" signifie que le code est accessible au public et peut être utilisé, modifié et distribué par n'importe qui. Il favorise une approche collaborative et publique du développement de logiciels. Il y a cependant un certain nombre d'éléments importants à prendre en compte
+lors du développement d'un logiciel libre.
 
 ### Licenses
 
-A GitHub repository _without_ a License is **not** open-source:
+Un dépôt GitHub _sans_ licence n'est **pas** open-source :
 
-> without a license, the default copyright laws apply, meaning that you retain all rights to your source code and no one
-> may reproduce, distribute, or create derivative works from your work.
+> sans licence, les lois sur les droits d'auteur s'appliquent par défaut, ce qui signifie que vous conservez tous les droits sur votre code source et que personne ne peut reproduire, distribuer ou créer des œuvres dérivées de votre travail.
 >
 > _source: https\://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository#choosing-the-right-license_
 
-This means, if you actually want to properly open-source your mods, that you'll have to pick an open-source license.
-This might sound scary, but it really doesn't have to be. GitHub created a very simple and nice website to find a
-license that fits your project: https\://choosealicense.com/
+Cela signifie que si vous voulez vraiment mettre vos mods en open-source, vous devrez choisir une licence open-source.
+Cela peut sembler effrayant, mais ce n'est pas une fatalité. GitHub a créé un site web très simple et sympa pour trouver une
+qui correspond à votre projet : https\://choosealicense.com/
 
-!> **Obligatory "we are not lawyers". Our interpretation of these licenses is primarily based off of the `choosealicense`
-website, as well as personal experience.**
+!> **Obligatoire "nous ne sommes pas des avocats". Notre interprétation de ces licences est principalement basée sur le site `choosealicense`, ainsi que sur notre expérience personnelle.**
 
-We recommend going with one of the following two licenses for mods:
+Nous recommandons d'opter pour l'une des deux licences suivantes pour les mods :
 
-- [GNU General Public License v3.0](https://choosealicense.com/licenses/gpl-3.0/) -- the main benefit of this license is
-  that anyone using your mod's code (be it as a spin-off version, updated version, or in other games) will _have_ to use
-  this license as well. This means your work, and any derivative work, will remain open-source. It means people can't
-  grab your work and create a version which has no public code, and it means the community will forever be able to build
-  upon your work and keep your mod alive, even if you lose interest in it.
-- [MIT License](https://choosealicense.com/licenses/mit/) -- this is a more permissive version of the GNU General Public
-  License. It _also_ allows users to create _closed-source_ versions of your mod. This means a user is not required to
-  share their updated code publicly. They must, however, still retain the original license's copyright notice readily
-  available.
+- [GNU General Public License v3.0](https://choosealicense.com/licenses/gpl-3.0/) -- le principal avantage de cette licence est que toute personne utilisant le code de votre mod (qu'il s'agisse d'une version dérivée, d'une version mise à jour, ou dans d'autres jeux) _devra_ également utiliser cette licence. Cela signifie que votre travail et tout travail dérivé, restera open-source. Cela signifie que les gens ne peuvent pas s'emparer de votre travail et créer une version qui n'a pas de code public, et cela signifie que la communauté sera toujours en mesure de construire sur votre travail et de maintenir votre mod en vie, même si vous vous désintéressez du sujet.
+- [MIT License](https://choosealicense.com/licenses/mit/) -- il s'agit d'une version plus permissive de la GNU General Public License. Il permet également aux utilisateurs de créer des versions _closed-source_ de votre mod. Cela signifie qu'un utilisateur n'est pas tenu de partager publiquement son code mis à jour. Ils doivent toutefois conserver la mention du droit d'auteur de la licence d'origine.
 
-### Healthy collaboration
+### Collaboration saine
 
-A modding community thrives when users help each other out. Keeping your mods open-source means current (and future)
-modders can learn from your current work, and perhaps even keep your mods updated if you ever leave the community.
+Une communauté de moddeurs prospère lorsque les utilisateurs s'entraident. Garder vos mods en open-source signifie que les moddeurs actuels (et futurs) peuvent apprendre de votre travail actuel et peut-être même garder vos mods à jour si vous quittez la communauté.
 
-It is, however, important to be ethical about this. We understand a modding community can get competitive. Please,
-refrain from taking code and claiming it as your own - always properly give credit where credit is due.
+Il est toutefois important de faire preuve d'éthique à cet égard. Nous comprenons que la communauté des moddeurs peut être compétitive. S'il vous plaît, abstenez-vous de prendre du code et de le revendiquer comme étant le vôtre - donnez toujours correctement le crédit là où il est dû.
 
-Likewise, when other users help you by fixing bugs, and want to submit a pull request, please accept that, rather
-than taking the fix and implementing it yourself - this gives them some credit for the fix, and fosters a community
-where people aren't afraid to help out.
+De même, lorsque d'autres utilisateurs vous aident en corrigeant des bugs et veulent soumettre une "pull request", veuillez l'accepter, plutôt que de prendre la correction et de l'implémenter vous-même - cela leur donne un peu de crédit pour la correction, et favorise une communauté où les gens n'ont pas peur de s'entraider.
