@@ -27,13 +27,9 @@ This guide is roughly based on some parts of the [BepInEx setup guide](https://d
 ### .Net SDK {#dotnet-sdk}
 An SDK (=Software Development Kit) is a system that allows you to turn your code into something that your PC can run. It is used by other tools, and you'll generally not interact with it directly.
 
-You'll want to download and install the latest .Net 7 SDK version from [this page](https://dotnet.microsoft.com/en-us/download/dotnet/7.0). It'll look something like this:
+You'll want to download and install the latest .NET SDK version from [this page](https://dotnet.microsoft.com/en-us/download). It'll look something like this:
 
-[![.Net SDK download](/images/initial-setup/net7sdkdownload.png)](https://dotnet.microsoft.com/en-us/download/dotnet/7.0)
-
-::: danger
-The .Net 8 SDK can cause issues with the BepInEx 5 template. Until these issues are resolved, it is recommended to install .Net 7 instead of 8.
-:::
+[![.Net SDK download](/images/initial-setup/netsdkdownload.png)](https://dotnet.microsoft.com/en-us/download)
 
 ### IDE
 By far the most important tool in a programmer's toolbox is an IDE (=Integrated Development Environment). For now, the definition of an "overengineered text editor" will suffice. Through an IDE, you can edit code far more efficiently, since it offers features such as:
