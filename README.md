@@ -9,17 +9,17 @@ This guide is a fork of [trombone.wiki](https://trombone.wiki).
 [Vitepress Guide](https://vitepress.dev/guide/getting-started)
 
 To install dependencies:
-```
+```shell
 npm i
 ```
 
 Run a preview of the wiki locally:
-```
+```shell
 npm run dev
 ```
 
 Build the wiki into `docs/.vitepress/dist`:
-```
+```shell
 npm run build
 ```
 
