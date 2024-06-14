@@ -36,15 +36,15 @@ APIs marked with a `Gold Star ⭐` have a tutorial on this wiki.
 ## Programming APIs
 
 ### Configuration
-- [ConfigurableCompany by Ansuz/Amrv](https://thunderstore.io/c/lethal-company/p/AMRV/ConfigurableCompany/) implements an in-game menu that allows developers to create file-dependant configurations in a simple way that will automatically synchronize when needed. [Learn how to develop with mod](/dev/apis/configurable-company.md).
+- ⭐ [ConfigurableCompany by Ansuz/Amrv](https://thunderstore.io/c/lethal-company/p/AMRV/ConfigurableCompany/) implements an in-game menu that allows developers to create file-dependant configurations in a simple way that will automatically synchronize when needed. [Learn how to develop with mod](/dev/apis/configurable-company.md).
 
 - ⭐ [CSync](https://thunderstore.io/c/lethal-company/p/Sigurd/CSync/) is a compact library/API enabling mod authors to synchronize the host's configuration file with all other clients. [The wiki page on CSync](/dev/apis/csync) will guide you through the process of implementing this into your own mod.
 
 ### Dungeons
-- [LethalLib by Evaisa](https://thunderstore.io/c/lethal-company/p/Evaisa/LethalLib/) allows you to add new dungeons.
+- ⭐ [LethalLib by Evaisa](https://thunderstore.io/c/lethal-company/p/Evaisa/LethalLib/) allows you to add new dungeons.
 
 ### Enemies
-- [LethalLib by Evaisa](https://thunderstore.io/c/lethal-company/p/Evaisa/LethalLib/) allows you to add new enemies, although the process is fairly involved and not currently well documented.
+- ⭐ [LethalLib by Evaisa](https://thunderstore.io/c/lethal-company/p/Evaisa/LethalLib/) allows you to add new enemies, although the process is fairly involved and not currently well documented.
 
 ### Input
 - [InputUtils by Rune580](https://thunderstore.io/c/lethal-company/p/Rune580/LethalCompany_InputUtils/) allows you to easily initialize input/keybinds with ingame rebinding. [The README](https://thunderstore.io/c/lethal-company/p/Rune580/LethalCompany_InputUtils/) has a developer quickstart.
@@ -64,6 +64,9 @@ APIs marked with a `Gold Star ⭐` have a tutorial on this wiki.
 
 ### Terminal
 - [TerminalApi by NotAtomicBomb](https://github.com/NotAtomicBomb/TerminalApi) adds a nice and easy way to add and modify terminal keywords. [The mod's GitHub README](https://github.com/NotAtomicBomb/TerminalApi) has documentation and an example plugin to reference.
+
+### Analytics
+- ⭐ [LethalAnalytics by RoosterBooster007](https://thunderstore.io/c/lethal-company/p/RB007/LethalAnalytics/) allows mod creators to see how their mods are used, easily catch errors, and learn about their audience. [The mod's GitHub README](https://github.com/RoosterBooster007/LethalAnalytics/) has documentation and examples to reference.
 
 ## Adding APIs to the wiki
 

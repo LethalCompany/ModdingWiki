@@ -188,6 +188,25 @@ export default defineConfig({
                         },
                       ]
                     },
+                    {
+                      text: 'LethalAnalytics',
+                      link: '/dev/apis/lethalanalytics',
+                      collapsed: true,
+                      items: [
+                        { text: 'Supported Analytics Sites', link: '/dev/apis/lethalanalytics/supported-analytics-sites' },
+                        {
+                          text: 'Usage Guide',
+                          link: '/dev/apis/lethalanalytics/usage-guide',
+                          collapsed: true,
+                          items: [
+                            { text: 'Creating a GA session', link: '/dev/apis/lethalanalytics/usage-guide/creating-a-ga-session' },
+                            { text: 'Sending GA events', link: '/dev/apis/lethalanalytics/usage-guide/sending-ga-events' },
+                            { text: 'Creating a GA4 property', link: '/dev/apis/lethalanalytics/usage-guide/creating-a-ga4-property' }
+                          ]
+                        },
+                        { text: 'README & User Privacy', link: '/dev/apis/lethalanalytics/readme-and-user-privacy' }
+                      ]
+                    }
                   ]
                 }
               ]
